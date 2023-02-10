@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:note_app/constant/color.dart';
 import 'package:note_app/constant/style.dart';
+import 'package:note_app/models/note_data.dart';
 import 'package:note_app/widget/field.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -34,45 +36,54 @@ class HomeScreen extends StatelessWidget {
               height: 20,
             ),
             Flexible(
-              child: ListView.builder(
-                itemCount: 10,
-                itemBuilder: ((context, index) {
-                  return Column(
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          color: const Color(0xffffffff),
-                          borderRadius: BorderRadius.circular(3),
-                        ),
-                        child: Column(
-                          children: const [
-                            ListTile(
-                              title: Text('Summer Vacation'),
-                              subtitle: Text('6 Aug 2020,07:48 PM'),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(
-                                left: 16,
-                                right: 16,
-                                bottom: 16,
-                              ),
-                              child: Text(
-                                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                                maxLines: 3,
-                                overflow: TextOverflow.ellipsis,
-                              ),
+              child: Consumer<NoteData>(
+                builder: (context, noteData, child) {
+                  return ListView.builder(
+                    itemCount: noteData.noteCount,
+                    itemBuilder: ((context, index) {
+                      return noteData.noteCount != 0
+                          ? Column(
+                              children: [
+                                Container(
+                                  decoration: BoxDecoration(
+                                    color: const Color(0xffffffff),
+                                    borderRadius: BorderRadius.circular(3),
+                                  ),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      ListTile(
+                                        title: Text(
+                                            noteData.getNotes[index]['title']),
+                                        subtitle:
+                                            const Text('6 Aug 2020,07:48 PM'),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                          left: 16,
+                                          right: 16,
+                                          bottom: 16,
+                                        ),
+                                        child: Text(
+                                          noteData.getNotes[index]['note'],
+                                          textAlign: TextAlign.left,
+                                          maxLines: 3,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                              ],
                             )
-                          ],
-                        ),
-                      ),
-                      index != 10 - 1
-                          ? const SizedBox(
-                              height: 20,
-                            )
-                          : const SizedBox(),
-                    ],
+                          : const Text('Empty hehe');
+                    }),
                   );
-                }),
+                },
               ),
             )
           ]),

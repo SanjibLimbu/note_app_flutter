@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:note_app/constant/color.dart';
 import 'package:note_app/constant/style.dart';
+import 'package:note_app/models/note_data.dart';
+import 'package:provider/provider.dart';
 
 class AddNote extends StatefulWidget {
   const AddNote({super.key});
@@ -11,6 +13,9 @@ class AddNote extends StatefulWidget {
 }
 
 class _AddNoteState extends State<AddNote> {
+  String newNoteTitle = '';
+  String newNote = '';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,7 +45,12 @@ class _AddNoteState extends State<AddNote> {
                     ),
                   ),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Provider.of<NoteData>(context, listen: false)
+                          .addNote(newNoteTitle, newNote);
+                      print(Provider.of<NoteData>(context, listen: false)
+                          .getNotes);
+                    },
                     child: const Icon(
                       Icons.check_rounded,
                       color: Colors.black,
@@ -48,7 +58,9 @@ class _AddNoteState extends State<AddNote> {
                   )
                 ],
               ),
+              //title
               TextField(
+                onChanged: (value) => newNoteTitle = value,
                 cursorColor: Colors.black54,
                 style: textStyle.copyWith(
                     color: primaryColor,
@@ -80,13 +92,15 @@ class _AddNoteState extends State<AddNote> {
                   ),
                 ),
               ),
+              //note
               TextField(
+                onChanged: (value) => newNote = value,
                 cursorColor: Colors.black54,
                 style: textStyle.copyWith(
                   color: primaryColor,
                 ),
                 textCapitalization: TextCapitalization.sentences,
-                  textInputAction: TextInputAction.done,
+                textInputAction: TextInputAction.done,
                 maxLines: null,
                 autofocus: true,
                 keyboardType: TextInputType.multiline,
