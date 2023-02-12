@@ -1,20 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import 'package:note_app/constant/color.dart';
 import 'package:note_app/constant/style.dart';
 import 'package:note_app/models/note_data.dart';
 import 'package:provider/provider.dart';
 
-class AddNote extends StatefulWidget {
-  const AddNote({super.key});
-
-  @override
-  State<AddNote> createState() => _AddNoteState();
-}
-
-class _AddNoteState extends State<AddNote> {
+class AddNote extends StatelessWidget {
   String newNoteTitle = '';
   String newNote = '';
+
+  AddNote({super.key});
+
 
   @override
   Widget build(BuildContext context) {
@@ -42,18 +39,42 @@ class _AddNoteState extends State<AddNote> {
                       height: 20,
                       width: 20,
                       fit: BoxFit.fill,
+                      color: const Color(0xff6173ee),
                     ),
                   ),
                   GestureDetector(
                     onTap: () {
-                      Provider.of<NoteData>(context, listen: false)
-                          .addNote(newNoteTitle, newNote);
-                      print(Provider.of<NoteData>(context, listen: false)
-                          .getNotes);
+                  
+
+                      if (newNote == '' && newNoteTitle == '') {
+                        Navigator.pop(context);
+                      } else if (newNoteTitle == '' && newNote != '') {
+                        Provider.of<NoteData>(context, listen: false).addNote(
+                          newNoteTitle,
+                          newNote,
+                          
+                        );
+
+                        Navigator.pop(context);
+                      } else if (newNoteTitle != '' && newNote == '') {
+                        Provider.of<NoteData>(context, listen: false).addNote(
+                          newNoteTitle,
+                          newNote,
+                         
+                        );
+                        Navigator.pop(context);
+                      } else {
+                        Provider.of<NoteData>(context, listen: false).addNote(
+                          newNoteTitle,
+                          newNote,
+                        
+                        );
+                        Navigator.pop(context);
+                      }
                     },
                     child: const Icon(
                       Icons.check_rounded,
-                      color: Colors.black,
+                      color: Colors.green,
                     ),
                   )
                 ],
