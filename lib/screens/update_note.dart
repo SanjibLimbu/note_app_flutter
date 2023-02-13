@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-
 import 'package:note_app/constant/color.dart';
 import 'package:note_app/constant/style.dart';
 import 'package:note_app/models/note_data.dart';
 import 'package:provider/provider.dart';
 
-/////use controller on textformfield
+
 
 class UpdateNote extends StatelessWidget {
   dynamic data;

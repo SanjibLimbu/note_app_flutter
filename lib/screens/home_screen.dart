@@ -3,7 +3,6 @@ import 'package:note_app/constant/color.dart';
 import 'package:note_app/constant/style.dart';
 import 'package:note_app/models/note_data.dart';
 import 'package:note_app/screens/note_list.dart';
-import 'package:note_app/screens/update_note.dart';
 
 import 'package:provider/provider.dart';
 
@@ -19,7 +18,6 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     Provider.of<NoteData>(context, listen: false).setFoundNotes();
     Provider.of<NoteData>(context, listen: false).firstCallValue();
-    print(Provider.of<NoteData>(context, listen: false).foundNotes);
     super.initState();
   }
 
@@ -108,4 +106,3 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
-

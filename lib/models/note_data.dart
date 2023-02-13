@@ -15,8 +15,6 @@ class NoteData extends ChangeNotifier {
   late int classKeyValue;
 
   void firstCallValue() {
-    boxKey.get('key');
-
     classKeyValue = boxKey.get('key') ?? 0;
   }
 
