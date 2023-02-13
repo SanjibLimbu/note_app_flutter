@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-
 import 'package:note_app/constant/color.dart';
 import 'package:note_app/constant/style.dart';
 import 'package:note_app/models/note_data.dart';
@@ -11,7 +9,6 @@ class AddNote extends StatelessWidget {
   String newNote = '';
 
   AddNote({super.key});
-
 
   @override
   Widget build(BuildContext context) {
@@ -44,15 +41,12 @@ class AddNote extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: () {
-                  
-
                       if (newNote == '' && newNoteTitle == '') {
                         Navigator.pop(context);
                       } else if (newNoteTitle == '' && newNote != '') {
                         Provider.of<NoteData>(context, listen: false).addNote(
                           newNoteTitle,
                           newNote,
-                          
                         );
 
                         Navigator.pop(context);
@@ -60,14 +54,12 @@ class AddNote extends StatelessWidget {
                         Provider.of<NoteData>(context, listen: false).addNote(
                           newNoteTitle,
                           newNote,
-                         
                         );
                         Navigator.pop(context);
                       } else {
                         Provider.of<NoteData>(context, listen: false).addNote(
                           newNoteTitle,
                           newNote,
-                        
                         );
                         Navigator.pop(context);
                       }
