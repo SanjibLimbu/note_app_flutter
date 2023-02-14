@@ -1,6 +1,6 @@
 # note_app
 
-A new Flutter project.
+https://youtube.com/watch/OAFTOXhPDVE
 
 ## Getting Started
 
